@@ -143,7 +143,12 @@ app.get('/.well-known/microsoft-identity-association.json',async (req,res)=>{
   // console.log(file);
   // const stream = fs.createWriteStream(`downloads/${'test.pdf'}`);
     try {
-      fs.createReadStream(`microsoft-identity-association.json`).pipe(res);
+      // fs.createReadStream(`microsoft-identity-association.json`).pipe(res);
+      // res.send(JSON.stringify(`microsoft-identity-association.json`));
+      fs.readFile(`microsoft-identity-association.json`, (err, json) => {
+        let obj = JSON.parse(json);
+        res.json(obj);
+      });
       // const file = fs.exists(`microsoft-identity-association.json`);
         // res(file);
     } catch (error) {
