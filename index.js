@@ -121,7 +121,7 @@ app.post('/renew-accesstoken',async (req,res)=>{
     // });
     axios({
       method: 'post',
-      url: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
+      url: 'https://login.microsoftonline.com/organizations/oauth2/v2.0/token',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'}, 
       data: {
         client_id:'e1895f81-d211-4d80-b4a2-fdf0c9814ffc',
@@ -129,7 +129,7 @@ app.post('/renew-accesstoken',async (req,res)=>{
         redirect_uri:'https://myossc.web.app',
         grant_type:"refresh_token",
         client_secret:'eKE8Q~gRq_OnTKi5pJCp4xWfHOo9EYfzF.lgaaX3',
-        refresh_token:'M.C106_BAY.-Cqlolrko!C*XbD1PTtfr5HTBgwCyWc!ykHpChD53FlzTlHvkQnDdUkkDnplM3d34U8jQGvz2J7dZAN8mrjZcrc503O7D3zMvD3HWNT!jkhgknA0aO0qhh4sfelAGwAtVjVAmHcqkXDz8nHCPB!SAKES3amiysZnatpsCdYbl2sE9SXy11SVWZdiElMSd3BMnq*m5u6Uve!sPgvl6aO*!N9HXcG3e9wg4rWErx4qDiJsmNrZDHkF4dpyYGpntu*oSa3o1VuwY8IdwfY5*6QbrO*pT4OtYg2YJGz2fCGBoaIz8rCGRalFewQN1eq29YF*z4Vk4ll!nvXDNKwG!yZz8bOycS6baNOP2wrsIzjEn2Og9CqNdKKidVSIdDMjcmuBVlF8TSHG2!vEJAFrCl9iVhSY$', // This is the body part
+        refresh_token:token, // This is the body part
       }
     }).then((response)=>{
       // console.log(response);
