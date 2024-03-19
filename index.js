@@ -164,7 +164,7 @@ function myCallback(interval) {
 //Run server in port
 const PORT = process.env.PORT || 3000
 app.listen(PORT,()=>{
-    const intervalID = setInterval(myCallback, 500000, "Server");
+    const intervalID = setInterval(myCallback, 180000, "Server");
     console.log('Run Server in Port ' + PORT)
 });
 
