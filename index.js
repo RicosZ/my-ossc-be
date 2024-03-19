@@ -155,16 +155,10 @@ app.get('/.well-known/microsoft-identity-association.json',async (req,res)=>{
         console.log(error);
     }
 });
-function myCallback(interval) {
-  // Your code here
-  // Parameters are purely optional.
-  console.log('Refresh: '+interval);
-}
 
 //Run server in port
 const PORT = process.env.PORT || 3000
 app.listen(PORT,()=>{
-    const intervalID = setInterval(myCallback, 180000, "Server");
     console.log('Run Server in Port ' + PORT)
 });
 
