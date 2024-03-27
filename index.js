@@ -159,6 +159,16 @@ app.get('/.well-known/microsoft-identity-association.json',async (req,res)=>{
 //Run server in port
 const PORT = process.env.PORT || 3000
 app.listen(PORT,()=>{
+  const intervalID = setInterval(myCallback, 60*1000);
+  function myCallback() {
+    axios({
+      method: 'get',
+      url: 'https://my-ossc-be.onrender.com/',
+    }).then((response)=>{
+      console.log(response.data);
+    });
+  }
+  
     console.log('Run Server in Port ' + PORT)
 });
 
