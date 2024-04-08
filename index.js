@@ -168,7 +168,7 @@ app.listen(PORT,()=>{
         method: 'get',
         url: 'https://my-ossc-be.onrender.com/',
       }).then((response)=>{
-        console.log(response.data);
+        console.log('API Works!!'+'  '+new Date().getHours());
       });
     }
   }
