@@ -161,7 +161,7 @@ const PORT = process.env.PORT || 3000
 app.listen(PORT,()=>{
   const intervalID = setInterval(myCallback, 60*1000);
   function myCallback() {
-    if(new Date().getHours() > '19') {
+    if(new Date().getHours() > '12') {
       console.log('turn off api!! '+new Date().getHours());
     }else{
       axios({
