@@ -179,19 +179,19 @@ mongoose.connect('mongodb+srv://osscadmin:OsscAdmin2024@ossc-data.gok2lp3.mongod
 //Run server in port
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
-  // const intervalID = setInterval(myCallback, 60*1000);
-  // function myCallback() {
-  //   if(new Date().getHours() > '12') {
-  //     console.log('turn off api!! '+new Date().getHours());
-  //   }else{
-  //     axios({
-  //       method: 'get',
-  //       url: 'https://my-ossc-be.onrender.com/',
-  //     }).then((response)=>{
-  //       console.log('API Works!!'+'  '+new Date().getHours());
-  //     });
-  //   }
-  // }
+  const intervalID = setInterval(myCallback, 60*1000);
+  function myCallback() {
+    if(new Date().getHours() > '12') {
+      console.log('turn off api!! '+new Date().getHours());
+    }else{
+      axios({
+        method: 'get',
+        url: 'https://my-ossc-be.onrender.com/',
+      }).then((response)=>{
+        console.log('API Works!!'+'  '+new Date().getHours());
+      });
+    }
+  }
 
   console.log('Run Server in Port ' + PORT)
 });
