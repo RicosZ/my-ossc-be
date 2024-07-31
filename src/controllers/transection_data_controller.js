@@ -10,7 +10,7 @@ class TransectionController {
 
     static async get(req, res, next) {
         try {
-            const { act, desc, search, limit } = req.query;
+            const { act='', desc='', search='', limit=100 } = req.query;
             let pipeline = [
                 {
                     '$match': {
