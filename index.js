@@ -143,7 +143,7 @@ app.get('/removefile/:filename',async(req,res)=>{
     fs.unlinkSync(filePath);
     res.send(true);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.send(false);
   }
 })

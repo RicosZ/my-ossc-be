@@ -17,5 +17,9 @@ router.patch(
   '/edit',
   TransectionController.edit,
 );
+router.post(
+  '/export',
+  TransectionController.export2Excel,
+);
 
 module.exports = router;

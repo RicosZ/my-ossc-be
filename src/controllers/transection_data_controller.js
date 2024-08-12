@@ -1,6 +1,50 @@
 const TransectionData = require('../models/transection_data_model');
+const xlsx = require('xlsx');
 
 class TransectionController {
+
+    static async export2Excel(req, res, next) {
+        const { act = '', desc = '', dateBefor, dateAfter } = req.body;
+        let pipeline = [
+            {
+                '$match': {
+                    'act': act == '' ? RegExp('') : act
+                }
+            }, {
+                '$match': {
+                    'desc': desc == '' ? RegExp('') : desc
+                }
+            }, {
+                '$match': {
+                    'date': {
+                        $gte: new Date(dateBefor),
+                        $lte: new Date(dateAfter),
+                    }
+                }
+            }, {
+                '$sort': {
+                    '_id': 1
+                }
+            }
+        ]
+        // await TransectionData.find({}).sort({_id:1})
+        await TransectionData.aggregate(Array.prototype.concat(pipeline)).then(result => {
+            // if(result.length > 0 ){
+            let response = JSON.parse(JSON.stringify(result));
+            let workbook = xlsx.utils.book_new();
+            let worksheet = xlsx.utils.json_to_sheet(response);
+            xlsx.utils.book_append_sheet(workbook, worksheet, 'sheet1');
+            xlsx.writeFile(workbook, '../my-ossc-be/downloads/ossc-data.xlsx');
+            return res.status(200).json({
+                success: true
+            });
+            // } else {
+            // return res.status(200).json({
+            //     success: false
+            // })
+            // }
+        })
+    }
 
     static async getReceiveNumber() {
         const reNUmber = await TransectionData.findOne().sort({ _id: -1 });
@@ -10,7 +54,7 @@ class TransectionController {
 
     static async get(req, res, next) {
         try {
-            const { act='', desc='', search='', limit=100 } = req.query;
+            const { act = '', desc = '', search = '', limit = 100 } = req.query;
             let pipeline = [
                 {
                     '$match': {
@@ -22,15 +66,15 @@ class TransectionController {
                     }
                 }, {
                     '$match': {
-                        'receiveNumber': RegExp(search)
-                    }
-                }, {
-                    '$match': {
-                        'customer': RegExp(search)
-                    }
-                }, {
-                    '$match': {
-                        'company': RegExp(search)
+                        '$or': [
+                            {
+                                'receiveNumber': RegExp(search)
+                            }, {
+                                'customer': RegExp(search)
+                            }, {
+                                'company': RegExp(search)
+                            }
+                        ]
                     }
                 }, {
                     '$sort': {
@@ -53,15 +97,15 @@ class TransectionController {
                                 }
                             }, {
                                 '$match': {
-                                    'receiveNumber': RegExp(search)
-                                }
-                            }, {
-                                '$match': {
-                                    'receiveNumber': RegExp(search)
-                                }
-                            }, {
-                                '$match': {
-                                    'receiveNumber': RegExp(search)
+                                    '$or': [
+                                        {
+                                            'receiveNumber': RegExp(search)
+                                        }, {
+                                            'customer': RegExp(search)
+                                        }, {
+                                            'company': RegExp(search)
+                                        }
+                                    ]
                                 }
                             }, {
                                 '$sort': {
