@@ -186,7 +186,7 @@ app.listen(PORT, () => {
     }else{
       axios({
         method: 'get',
-        url: 'https://my-ossc-be.onrender.com/',
+        url: 'https://ossc-api.onrender.com/',
       }).then((response)=>{
         console.log('API Works!!'+'  '+new Date().getHours());
       });
