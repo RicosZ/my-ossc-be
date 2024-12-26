@@ -179,7 +179,7 @@ mongoose.connect('mongodb+srv://osscadmin:OsscAdmin2024@ossc-data.gok2lp3.mongod
 //Run server in port
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
-  const intervalID = setInterval(myCallback, 60*1000);
+  const intervalID = setInterval(myCallback, 5*60*1000);
   function myCallback() {
     if(new Date().getHours() > '12') {
       console.log('turn off api!! '+new Date().getHours());
