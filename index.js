@@ -5,6 +5,7 @@ const oneDriveAPI = require("onedrive-api")
 const pdfReader = require('pdf2json')
 const authRouter = require('./src/routes/auth_route');
 const transectionData = require('./src/routes/transection_data_route');
+const dashboard = require('./src/routes/report_route')
 const axios = require('axios');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -34,7 +35,7 @@ app.get('/', function (req, res) {
 
 app.use('/auth', authRouter)
 app.use('/transection', transectionData)
-
+app.use('/dashborad',dashboard)
 app.put('/upload', async (req, res) => {
   const { token, directory, fileName } = req.body;
   console.log(directory);
@@ -168,8 +169,8 @@ app.get('/.well-known/microsoft-identity-association.json', async (req, res) => 
 });
 
 mongoose.connect('mongodb+srv://osscadmin:OsscAdmin2024@ossc-data.gok2lp3.mongodb.net/ossc-data', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+  //useNewUrlParser: true,
+  //useUnifiedTopology: true,
 }).then(() => {
   console.log('Database Connected');
 }, (error) => {
