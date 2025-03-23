@@ -130,7 +130,7 @@ app.post('/fetch', async (req, res) => {
 app.get('/download/:filename', async (req, res) => {
   const { filename } = req.params;
   try {
-    const fi = fs.readFileSync(path.resolve(`downloads/${filename}`), "utf8",);
+    const fi = fs.readFileSync(path.resolve(`/tmp/${filename}`), "utf8",);
     res.send(fi);
   } catch (error) {
     console.log(error);

@@ -34,7 +34,7 @@ class TransectionController {
             let workbook = xlsx.utils.book_new();
             let worksheet = xlsx.utils.json_to_sheet(response);
             xlsx.utils.book_append_sheet(workbook, worksheet, 'sheet1');
-            xlsx.writeFile(workbook, 'downloads/ossc-data.xlsx');
+            xlsx.writeFile(workbook, '/tmp/ossc-data.xlsx');
             return res.status(200).json({
                 success: true
             });
