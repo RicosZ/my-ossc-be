@@ -23,7 +23,7 @@ var storage = multer.diskStorage({
 })
 
 const app = express();
-app.use(cors({ origin: "*" }));
+app.use(cors());
 app.use(multer({ storage: storage, limits: { fieldSize: 50 * 1024 * 1024, fileSize: 50 * 1024 * 1024 } }).any());
 const fs = require('fs');
 app.use(bodyParser.json({ limit: '50mb' }))
@@ -35,7 +35,7 @@ app.get('/', function (req, res) {
 });
 
 app.use('/auth', authRouter)
-app.use('/api/transection', transectionData)
+app.use('/transection', transectionData)
 app.use('/dashborad',dashboard)
 app.put('/upload', async (req, res) => {
   const { token, directory, fileName } = req.body;
