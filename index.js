@@ -24,15 +24,7 @@ var storage = multer.diskStorage({
 
 const app = express();
 
-const options = [
-  cors({
-    origin: '*',
-    methods: '*',
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
-  })
-];
-app.use(options);
+app.use(cors({ origin: "'https://myossc.web.app" }));
 
 app.use(multer({ storage: storage, limits: { fieldSize: 50 * 1024 * 1024, fileSize: 50 * 1024 * 1024 } }).any());
 const fs = require('fs');
