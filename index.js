@@ -23,7 +23,7 @@ var storage = multer.diskStorage({
 })
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.use(multer({ storage: storage, limits: { fieldSize: 50 * 1024 * 1024, fileSize: 50 * 1024 * 1024 } }).any());
 const fs = require('fs');
 app.use(bodyParser.json({ limit: '50mb' }))
