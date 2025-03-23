@@ -45,7 +45,7 @@ app.put('/upload', async (req, res) => {
   // async function uploadFile2Onedrive(file){
   // }
   try {
-    const filePath = `uploads/${fileName}`;
+    const filePath = `/tmp/${fileName}`;
     // const filePath = `uploads/${fileName}`;
     // const data = new Uint8Array(Buffer.from(file));
     // fs.appendFile(filePath, data,(err)=>{
@@ -110,7 +110,7 @@ app.post('/fetch', async (req, res) => {
   if(!file)  return res.status(200).json({
     success: true,
   });
-  const stream = fs.createWriteStream(`downloads/${path2File.split('/')[3]}`);
+  const stream = fs.createWriteStream(`/tmp/${path2File.split('/')[3]}`);
   console.log(path2File);
   try {
     const promise = oneDriveAPI.items.download({
@@ -139,7 +139,7 @@ app.get('/download/:filename', async (req, res) => {
 
 app.get('/removefile/:filename',async(req,res)=>{
   const {filename} = req.params;
-  const filePath = `downloads/${filename}`;
+  const filePath = `/tmp/${filename}`;
   try {
     console.log('aaaaaaaaaaaaaaaaaaaa');
     fs.unlinkSync(filePath);
