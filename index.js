@@ -14,7 +14,7 @@ const path = require("path");
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './uploads')
+    cb(null, '/tmp/')
   },
   filename: function (req, file, cb) {
     const { fileName } = req.body
@@ -158,7 +158,7 @@ app.get('/.well-known/microsoft-identity-association.json', async (req, res) => 
   try {
     // fs.createReadStream(`microsoft-identity-association.json`).pipe(res);
     // res.send(JSON.stringify(`microsoft-identity-association.json`));
-    fs.readFile(`microsoft-identity-association.json`, (err, json) => {
+    fs.readFile(path.resolve(`microsoft-identity-association.json`), (err, json) => {
       let obj = JSON.parse(json);
       res.json(obj);
     });
