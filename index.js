@@ -10,6 +10,7 @@ const axios = require('axios');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const multer = require('multer');
+const path = require("path");
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -129,7 +130,7 @@ app.post('/fetch', async (req, res) => {
 app.get('/download/:filename', async (req, res) => {
   const { filename } = req.params;
   try {
-    const fi = fs.readFileSync(`./downloads/${filename}`);
+    const fi = fs.readFileSync(path.resolve(`downloads/${filename}`), "utf8",);
     res.send(fi);
   } catch (error) {
     console.log(error);
