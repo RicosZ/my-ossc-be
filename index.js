@@ -117,9 +117,17 @@ app.post('/fetch', async (req, res) => {
       accessToken: token,
       itemPath: path2File,
     });
-    await promise.then((fileStream) => fileStream.pipe(stream));
-    return res.status(200).json({
-      success: true,
+    const fileStream = await promise; // Wait for the file stream
+    fileStream.pipe(stream);
+    // await promise.then((fileStream) => fileStream.pipe(stream));
+    stream.on("finish", () => {
+      console.log("✅ File downloaded:", filePath);
+      res.status(200).json({ success: true, filePath });
+    });
+
+    stream.on("error", (err) => {
+      console.error("❌ Stream Error:", err);
+      res.status(500).json({ success: false, error: err.message });
     });
   } catch (error) {
     console.log(error);
