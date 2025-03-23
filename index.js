@@ -121,13 +121,13 @@ app.post('/fetch', async (req, res) => {
     fileStream.pipe(stream);
     // await promise.then((fileStream) => fileStream.pipe(stream));
     stream.on("finish", () => {
-      console.log("✅ File downloaded:", filePath);
-      res.status(200).json({ success: true, filePath });
+      console.log("✅ File downloaded:", path2File.split('/')[3]);
+      res.status(200).json({ success: true });
     });
 
     stream.on("error", (err) => {
       console.error("❌ Stream Error:", err);
-      res.status(500).json({ success: false, error: err.message });
+      res.status(500).json({ success: false });
     });
   } catch (error) {
     console.log(error);
