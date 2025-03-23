@@ -35,7 +35,7 @@ app.get('/', function (req, res) {
 });
 
 app.use('/auth', authRouter)
-app.use('/transection', transectionData)
+app.use('/api/transection', transectionData)
 app.use('/dashborad',dashboard)
 app.put('/upload', async (req, res) => {
   const { token, directory, fileName } = req.body;
